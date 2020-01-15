@@ -13,7 +13,7 @@ include_once "header.php";
 <body>
   <?php
 
-$inserted = Model::editUsers('','','','','');
+$inserted = Model::editUser('','','','','');
 var_dump($inserted);
 if($inserted == false) {
     echo "neproběhl insert";

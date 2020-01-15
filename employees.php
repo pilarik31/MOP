@@ -14,7 +14,7 @@ $employees = Model::getAllEmployees();
 
 ?>
     <br>
-    <h2>Employees</h2>
+    <h2>Users</h2>
     <a class="btn btn-secondary background-btn" href="addUser.php">Add user</a>
 
     <div class="table-responsive">

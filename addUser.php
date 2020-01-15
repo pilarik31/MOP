@@ -13,30 +13,56 @@ include_once "header.php";
 <body>
   <?php
 
+$submit = filter_input(INPUT_POST, "submit");
+
+
+$isAdded = Model::addUser('','','','','');
+if(!$isAdded) {
+    echo "proběhl";
+}
+else {
+    "Something went wrong";
+}
+
+
+if ($submit == 'odeslat') {
+    echo "formulář byl odeslán";
+}
+else {
+  "something weng wrong!!";
+
+}
+
+
+var_dump($submit);
   ?>
-<form action="addUser.php">
 
-<label for="name">Jméno</label>
-<input type="text" name="firstname" class="form-control" id="firstname" aria-describedby="name" placeholder="firstname"
-  value="">
 
-<label for="surname">Přijmení</label>
-<input type="text" name="surname" class="form-control" id="surname" aria-describedby="surname" placeholder="surname"
-  value="">
+<form action="addUser.php" method="post">
 
-  <label for="email">Email</label>
-<input type="email" name="email" class="form-control" id="surname" aria-describedby="surname" placeholder="surname"
-  value="">
-
-  <label for="password">Heslo</label>
-<input type="password" name="password" class="form-control" id="surname" aria-describedby="surname" placeholder="surname"
-  value="">
-
-  <label for="role">Role</label>
+<label for="role">Role</label>
 <input type="" name="role" class="form-control" id="" aria-describedby="" placeholder=""
   value="">
 
+<label for="name">Firstname</label>
+<input type="text" name="firstname" class="form-control" id="firstname" aria-describedby="name" placeholder=""
+  value="">
+
+<label for="surname">Surname</label>
+<input type="text" name="surname" class="form-control" id="" aria-describedby="" placeholder=""
+  value="">
+
+  <label for="email">email</label>
+<input type="email" name="email" class="form-control" id="" aria-describedby="" placeholder=""
+  value="">
+
+  <label for="password">password</label>
+<input type="password" name="password" class="form-control" id="" aria-describedby="" placeholder=""
+  value="">
+
+  
+
 <br>
-<input type="submit" value="submit">
+<input type="submit" value="odeslat" name="submit">
 </form>
 

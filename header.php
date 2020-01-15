@@ -30,18 +30,25 @@ require_once __DIR__ .DIRECTORY_SEPARATOR . "vendor". DIRECTORY_SEPARATOR  . "au
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link " href="cars.php">
-                          Přehled vozidel <span class="sr-only">(current)</span>
+                         Cars <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="rides.php">
-                                Kniha jízd
+                                Rides
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="employees.php">
-                                řidiči </a>
+                                Employees </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout.php">
+                                LOGOUT </a>
+                        </li>
+
+
                        
 
 
