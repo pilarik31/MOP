@@ -24,6 +24,7 @@ $employees = Model::getAllEmployees();
                     <th>id</th>
                     <th>name</th>
                     <th>surname</th>
+                    <th>email</th>
                     <th>edit</th>
 
                 </tr>
@@ -36,6 +37,10 @@ $employees = Model::getAllEmployees();
                     <td> <?php echo $employee['id_user'] ?></td>
                     <td> <?php echo $employee['firstname'] ?></td>
                     <td> <?php echo $employee['surname'] ?></td>
+                    <td> <?php echo $employee['email'] ?></td>
+
+                    
+
                     <td>
                         <a href="edit_user.php">edit </a>
                     </td>

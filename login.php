@@ -9,7 +9,6 @@ session_start();
   
 
 $submit = filter_input(INPUT_POST, 'loginSubmit');
-var_dump($_SESSION["logged"]);
 if (!empty($submit)) {
     echo "Formulář byl odeslán";
     $email = filter_input(INPUT_POST, 'email');

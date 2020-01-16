@@ -1,8 +1,5 @@
 <?php
 include_once  "header.php";
-?>
-
-<?php
 
 $rides = Model::getAllRides();
 
@@ -22,8 +19,7 @@ $rides = Model::getAllRides();
                     <th>TA</th>
                     <th>PL</th>
                     <th>PA</th>
-                    <th>km</th>
-                    <th>km</th>
+                    <th>leght</th>
                     <th>note</th>
                     <th>status</th>
                     
