@@ -1,12 +1,7 @@
 <?php
 include_once  "header.php";
 
-  
-
 session_start();
-
-
-  
 
 $submit = filter_input(INPUT_POST, 'loginSubmit');
 if (!empty($submit)) {
@@ -15,8 +10,11 @@ if (!empty($submit)) {
     $password = filter_input(INPUT_POST, 'password');
     if (Model::authenticate($email, $password)) {
       $_SESSION["logged"] = TRUE;
-      header ("location: index.php");
-
+      $_SESSION["userRole"] = Model::getUserRole($email);
+      header ("location:index.php");
+    }
+    else{
+      header ("location:login.php");
     }
 }
 

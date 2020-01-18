@@ -1,22 +1,32 @@
 <?php
 require_once 'inc/database.php';
 
-class Model 
+class Model
 {
-
     private const SALT = 'fsdnjuibfasuiasoibdiob2619adsas';
 
-    public static function authenticate($email, $password) {
+    public static function authenticate($email, $password)
+    {
         $hashedPassword = md5($password . self::SALT);
         $sql = "
         SELECT * FROM USERS
         WHERE email LIKE '$email' AND password LIKE '$hashedPassword'
         ";
         $result = Database::query($sql);
-        if(!$result) {
-            return FALSE;
+        var_dump($result);
+        if ($result->num_rows > 0) {
+            return true;
         }
-        return TRUE;
+    }
+
+    public static function getUserRole($email)
+    {
+        $sql = "SELECT * FROM users
+        WHERE email LIKE '$email'";
+        $result = Database::query($sql);
+        while ($row = $result->fetch_assoc()) {
+            return $row ['id_role'];
+        }
     }
 
     public static function getAllCars()
@@ -70,21 +80,19 @@ class Model
         $sql="UPDATE cars(type, SPZ)
         VALUES ('', '')";
         return  Database::query($sql);
-    
     }
 
 
-    public static function editUser($id_user, $id_role, $firstname, $surname, $email, $password = "", $active)
+    public static function editUser($id_user, $id_role, $firstname, $surname, $email, $password = "")
     {
-        if(empty($password)) { 
-        $sql = "UPDATE users SET 
+        if (empty($password)) {
+            $sql = "UPDATE users SET 
         firstname = 'firstname',
         surname = 'surname',
         email = 'email',
         WHERE id_user = $id_user;
         ";
-        }
-        else {
+        } else {
             $hashedPassword = md5(password . self::SALT);
             $sql = "UPDATE users SET 
             firstname = 'firstname',
@@ -92,7 +100,7 @@ class Model
             WHERE id_user = $id_user;
             ";
         }
-        return Database::query($sql); 
+        return Database::query($sql);
     }
 
     public static function editRides($type, $SPZ)
@@ -107,7 +115,6 @@ class Model
         $sql="INSERT INTO cars(type, SPZ)
         VALUES ('', '')";
         return  Database::query($sql);
-    
     }
 
     public static function addUser($role, $firstname, $surname, $email, $password)
@@ -119,10 +126,10 @@ class Model
     }
 
 
-    public static function addRide($role, $user, $car, $timeLeft, $timeArrived, $placeLeft, $placeArrived, $kmBefore, $kmAfter, $note, $state)
+    public static function addRide($user, $car, $timeLeft, $timeArrived, $placeLeft, $placeArrived, $kmBefore, $kmAfter, $note)
     {
-        $sql="INSERT INTO rides (id_role, id_user, id_car, time_left, time_arrived, place_left, place_arrived, km_before, km_after, note, state, )
-        VALUES ('', '', '', '', '','', '', '', '', '','')";
+        $sql="INSERT INTO `rides` (`id_user`, `id_car`, `time_left`, `time_arrived`, `place_left`, `place_arrived`, `km_before`, `km_after`, `note`)
+        VALUES ('$user', '$car', '$timeLeft', '$timeArrived','$placeLeft', '$placeArrived', '$kmBefore', '$kmAfter', '$note')";
         return Database::query($sql);
     }
 }

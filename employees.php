@@ -1,5 +1,14 @@
 <?php
 include_once "header.php";
+include_once "nav.php";
+session_start();
+if (!($_SESSION["userRole"]=="1" || $_SESSION["userRole"] == "2")) {
+    header("location:index.php");
+
+}
+
+
+
 ?>
 
 
