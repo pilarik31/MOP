@@ -5,6 +5,9 @@ class Model
 {
     private const SALT = 'fsdnjuibfasuiasoibdiob2619adsas';
 
+    public static function userCar()
+    {}
+
     public static function authenticate($email, $password)
     {
         $hashedPassword = md5($password . self::SALT);
@@ -52,9 +55,20 @@ class Model
         return $employees;
     }
 
+    public static function getUserById($idUser)
+    {
+        $sql = "SELECT * FROM users
+                WHERE id_user = '$idUser'";
+        $result = Database::query($sql);
+        while ($row = $result->fetch_assoc()) {
+            $user = $row;
+        }
+        return $user;
+    }
+
     public static function getAllRides()
     {
-        $sql = 'SELECT * FROM rides;';
+        $sql = "SELECT * FROM rides;";
         $result = Database::query($sql);
         while ($row = $result->fetch_assoc()) {
             $rides[] = $row;
@@ -77,36 +91,46 @@ class Model
 
     public static function editCar($type, $SPZ)
     {
-        $sql="UPDATE cars(type, SPZ)
-        VALUES ('', '')";
+        $sql="UPDATE cars SET 
+        type = '$type',
+        SPZ = '$SPZ'";
+
+        
         return  Database::query($sql);
     }
 
-
+    
     public static function editUser($id_user, $id_role, $firstname, $surname, $email, $password = "")
     {
         if (empty($password)) {
             $sql = "UPDATE users SET 
-        firstname = 'firstname',
-        surname = 'surname',
-        email = 'email',
-        WHERE id_user = $id_user;
+            id_role = $id_role,
+            firstname = '$firstname',
+            surname = '$surname',
+            email = '$email'
+            WHERE id_user = $id_user
         ";
         } else {
-            $hashedPassword = md5(password . self::SALT);
+            $hashedPassword = md5($password . self::SALT);
             $sql = "UPDATE users SET 
-            firstname = 'firstname',
-            password = 'hashedPassword'
-            WHERE id_user = $id_user;
+            id_role = '$id_role',
+            firstname = '$firstname',
+            surname = '$surname',
+            email = '$email',
+            password = '$hashedPassword'
+            WHERE id_user = $id_user
             ";
         }
         return Database::query($sql);
     }
 
-    public static function editRides($type, $SPZ)
+    public static function editRides($user, $car, $timeLeft, $timeArrived, $placeLeft, $placeArrived, $kmBefore, $kmAfter, $note)
     {
-        $sql="UPDATE cars(type, SPZ)
-        VALUES ('', '')";
+        $sql="UPDATE cars SET
+        type = 'type',
+        SPZ = '$SPZ',
+        WHERE id_ride = $id_ride";
+
         return  Database::query($sql);
     }
 

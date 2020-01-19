@@ -2,7 +2,7 @@
 include_once "header.php";
 include_once "nav.php";
 session_start();
-if (!($_SESSION["userRole"]=="1" || $_SESSION["userRole"] == "2")) {
+if (!($_SESSION["userRole"]=="1" )) {
     header("location:index.php");
 
 }
@@ -51,7 +51,7 @@ $employees = Model::getAllEmployees();
                     
 
                     <td>
-                        <a href="edit_user.php">edit </a>
+                        <a href="edit_user.php?id_user=<?= $employee['id_user'] ?>">edit </a>
                     </td>
 
 
