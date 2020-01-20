@@ -43,7 +43,7 @@ class Model
         $result = Database::query($sql);
         var_dump($result);
         while ($row = $result->fetch_assoc()) {
-             $rides[] = $row;
+             $rides  = $row;
         }
         return $rides;
 
@@ -61,6 +61,7 @@ class Model
         }
         return $id;
     }
+
     
 
 

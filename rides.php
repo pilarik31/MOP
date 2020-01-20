@@ -61,7 +61,7 @@ foreach ($rides as $ride) {
     
 } else {
     var_dump($_SESSION);
-    $driverRides = Model::getAllDriverRides($_SESSION['user_id']); 
+    $driverRides = Model::getAllDriverRides(); 
     var_dump($driverRides);
     ?>
     
@@ -84,18 +84,18 @@ foreach ($rides as $ride) {
                 </thead>
                 <tbody>
                     <?php
-    foreach ($driverRides as $ride) {
+    foreach ($driverRides as $driverRide) {
         ?><tr>
     
-                        <td><?php echo $ride['id_ride'] ?></td>
-                        <td><?php echo $ride['id_car'] ?></td>
-                        <td><?php echo $ride['time_left'] ?></td>
-                        <td><?php echo $ride['time_arrived'] ?></td>
-                        <td><?php echo $ride['place_left'] ?></td>
-                        <td><?php echo $ride['time_arrived'] ?></td>
-                        <td><?php echo $ride['km_before'] ?></td>
-                        <td><?php echo $ride['km_after'] ?></td>
-                        <td><?php echo $ride['note'] ?></td>
+                        <td><?php echo $driverRide['id_ride'] ?></td>
+                        <td><?php echo $driverRide['id_car'] ?></td>
+                        <td><?php echo $driverRide['time_left'] ?></td>
+                        <td><?php echo $driverRide['time_arrived'] ?></td>
+                        <td><?php echo $driverRide['place_left'] ?></td>
+                        <td><?php echo $driverRide['time_arrived'] ?></td>
+                        <td><?php echo $driverRide['km_before'] ?></td>
+                        <td><?php echo $driverRide['km_after'] ?></td>
+                        <td><?php echo $driverRide['note'] ?></td>
                         
                         <td>
                             <a href="edit_ride.php?id_ride=<?= $ride['id_ride'] ?>">edit </a>
