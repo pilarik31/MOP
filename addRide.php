@@ -1,9 +1,8 @@
 <?php
 include_once "header.php";
 include_once "nav.php";
-session_start();
-if (!($_SESSION["userRole"] == "1") || ($_SESSION["userRole"] == "4" )) {
-  header("location:index.php");
+if (!($_SESSION["userRole"]=="1" || $_SESSION["userRole"]=="4")) {
+    header("location:index.php");
 
 }
 $submit = filter_input(INPUT_POST, "submit");

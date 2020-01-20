@@ -20,16 +20,26 @@ include_once "header.php";
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar sidebar-sticky">
                 <ul class="nav flex-column">
-                    <li class="nav-item">
+                <?php if ($_SESSION["userRole"]=="1" || $_SESSION["userRole"] == "2") {
+                        ?>   <li class="nav-item">
                         <a class="nav-link " href="cars.php">
                             Cars <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+<?php
+                }
+                ?>
+
+                    <?php if ($_SESSION["userRole"]=="1" || $_SESSION["userRole"] == "4") {
+                        ?>  <li class="nav-item">
                         <a class="nav-link" href="rides.php">
                             Rides
                         </a>
                     </li>
+
+                    <?php
+                    }
+                    ?>
 
                     <?php if ($_SESSION["userRole"]=="1" || $_SESSION["userRole"] == "2") {
                         ?> <li class="nav-item">

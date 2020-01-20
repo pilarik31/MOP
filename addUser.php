@@ -62,24 +62,7 @@ var_dump($submit);
   <label for="password">password</label>
   <input type="password" name="password" class="form-control" id="" aria-describedby="" placeholder="" value="">
 
-  <?php
-  if ($_SESSION['userRole'] == '1') {
-    ?>
-    <label for="carSelect">Cars</label>
-    <select multiple id="carSelect" name="carSelect">
-    <?php
-    foreach ($cars as $car) {
-      ?>
-      <option value="<?= $car['id_car'] ?>"><?= $car['type'] ?></option>
-      <?php
-    }
-    ?>
-      
-  </select><br>
-    <?php
-  }
 
-  ?>
 
 
 
