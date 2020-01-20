@@ -48,8 +48,13 @@ if (isset($submit)) {
     <input type="radio" name="role" value="" >Řidič<br> --> 
    
     
-    <label for="id_car">ID car</label>
-    <input type="text" name="car" class="form-control" id=""  placeholder="" >
+    <label for="role">Car</label><br>
+  <select id="role" name="car">
+  <option value="1">1</option>
+  <option value="2">1</option>
+  <option value="3">1</option>
+  <option value="4">1</option> 
+  </select><br>
     <label for="placeL">Place Left</label>
     <input type="text" name="placeL" class="form-control" id=""  placeholder="" >
     <label for="placeA">Place Arrive</label>

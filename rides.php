@@ -96,6 +96,11 @@ if (!($_SESSION["userRole"] == "1" || $_SESSION["userRole"] == "4")) {
                 </td>
             </tr>
 
+
+    } ?></tbody>
+    </table> <?php
+    
+} 
             <?php
         } ?>
         </tbody>
