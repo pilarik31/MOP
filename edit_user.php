@@ -2,7 +2,7 @@
 include_once "header.php";
 include_once "nav.php";
 session_start();
-session_start();
+  
 if (!($_SESSION["userRole"]=="1")) {
     header("location:index.php");
 
@@ -23,7 +23,7 @@ $password = filter_input(INPUT_POST,'password');
 
 
 if (isset($submit)){
-  var_dump(Model::editUser($idUser, $id_role, $firstname, $surname, $email, $password));
+  (Model::editUser($idUser, $id_role, $firstname, $surname, $email, $password));
 }
 
 $user = Model::getUserById($idUser);

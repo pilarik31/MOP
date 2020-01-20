@@ -7,6 +7,8 @@ include_once "header.php";
 
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="menu navbar-brand col-sm-12 col-md-12 mr-0" href="index.php">Vozový park</a>
+  
+
 
 
 
@@ -34,17 +36,19 @@ include_once "header.php";
                         <a class="nav-link" href="employees.php">
                             Employees </a>
                     </li> 
+
+                   
                     <?php  
                         
                     } ?>
-
-                               
-
-                <li class="nav-item">
+                     <li class="nav-item">
                     <a class="nav-link" href="logout.php">
                         LOGOUT </a>
                 </li>
 
+                               
+
+               
 
                
 

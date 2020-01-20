@@ -15,7 +15,7 @@ if (!($_SESSION["userRole"]=="1" )) {
 
 <body>
     <?php
-$employees = Model::getAllEmployees();
+$employees = Model::getAllUsers();
 
 
 
@@ -47,14 +47,7 @@ $employees = Model::getAllEmployees();
                     <td> <?php echo $employee['firstname'] ?></td>
                     <td> <?php echo $employee['surname'] ?></td>
                     <td> <?php echo $employee['email'] ?></td>
-
-                    
-
-                    <td>
-                        <a href="edit_user.php?id_user=<?= $employee['id_user'] ?>">edit </a>
-                    </td>
-
-
+                    <td> <a href="edit_user.php?id_user=<?= $employee['id_user'] ?>">edit </a> </td>
                 </tr> <?php
             }
                 ?>

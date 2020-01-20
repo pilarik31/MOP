@@ -40,8 +40,8 @@ $cars = Model::getAllCars();
                         <td><?php echo $car['type'] ?></td>
                         <td><?php echo $car['SPZ'] ?></td>
                         <td>
-                            <a class="btn btn-primary background-btn "href="edit_car.php">edit </a>
-                        </td>
+                        <a href="edit_car.php?id_car=<?= $car['id_car'] ?>">edit </a>
+                    </td>
 
                     </tr>
                     <?php
