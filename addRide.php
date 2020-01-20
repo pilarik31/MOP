@@ -1,46 +1,43 @@
 <?php
 include_once "header.php";
 include_once "nav.php";
-if (!($_SESSION["userRole"]=="1" || $_SESSION["userRole"]=="4")) {
+if (!($_SESSION["userRole"] == "1" || $_SESSION["userRole"] == "4")) {
     header("location:index.php");
-
 }
 $submit = filter_input(INPUT_POST, "submit");
 
 
 
 if (isset($submit)) {
-  $car =  filter_input(INPUT_POST,"car");
+    $car =  filter_input(INPUT_POST, "car");
 
-  $placeLeft = filter_input(INPUT_POST, "placeL");
-  $placeArrived = filter_input(INPUT_POST, "placeA");
-  $timeLeft = filter_input(INPUT_POST, "timeL");
-var_dump($timeLeft);
-  $timeArrived = filter_input(INPUT_POST, "timeA");
-  $note = filter_input(INPUT_POST, "note");
-  $kmBefore = filter_input(INPUT_POST, "kmBefore");
-  $kmAfter = filter_input(INPUT_POST, "kmAfter");
+    $placeLeft = filter_input(INPUT_POST, "placeL");
+    $placeArrived = filter_input(INPUT_POST, "placeA");
+    $timeLeft = filter_input(INPUT_POST, "timeL");
+    $timeArrived = filter_input(INPUT_POST, "timeA");
+    $note = filter_input(INPUT_POST, "note");
+    $kmBefore = filter_input(INPUT_POST, "kmBefore");
+    $kmAfter = filter_input(INPUT_POST, "kmAfter");
 
-  $isAdded = Model::addRide($car, $timeLeft, $timeArrived,$placeLeft, $placeArrived, $kmBefore, $kmAfter, $note);
+    $isAdded = Model::addRide(
+        $car,
+        $timeLeft,
+        $timeArrived,
+        $placeLeft,
+        $placeArrived,
+        $kmBefore,
+        $kmAfter,
+        $note
+    );
 
 
-  if($isAdded)
-  {  echo "zápis proběhl v pořádku";
-
-  }
-  else {
-    echo "něco se pos*alo";
-  }
-
+    if ($isAdded) {
+        echo "zápis proběhl v pořádku";
+    } else {
+        echo "něco se pos*alo";
+    }
 }
-
-
-
-
-
-
-var_dump($submit);
-  ?>
+?>
 
 
   <form action="addRide.php" method="post">

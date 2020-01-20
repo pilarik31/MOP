@@ -8,14 +8,14 @@ if (!empty($submit)) {
     echo "Formulář byl odeslán";
     $email = filter_input(INPUT_POST, 'email');
     $password = filter_input(INPUT_POST, 'password');
+    var_dump(Model::authenticate($email, $password));
     if (Model::authenticate($email, $password)) {
-      $_SESSION["logged"] = TRUE;
-      $_SESSION["userRole"] = Model::getUserRole($email);
-      $_SESSION["userId"] = Model::getIdByEmail($email);
-      header ("location:index.php");
-    }
-    else{
-      header ("location:login.php");
+        $_SESSION["logged"] = true;
+        $_SESSION["userRole"] = Model::getUserRole($email);
+        $_SESSION["userId"] = Model::getIdByEmail($email);
+        header("location:index.php");
+    } else {
+        header("location:login.php");
     }
 }
 

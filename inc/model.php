@@ -5,13 +5,7 @@ class Model
 {
     private const SALT = 'fsdnjuibfasuiasoibdiob2619adsas';
 
-    public static function userCar()
-    {$sql= "SELECT  c.id_car, c.type u.id u.name u.surname
-            FROM cars c
-            JOIN users_cars uc ON c.id_car = uc.id_car
-            JOIN users u ON uc.id_user = u.id_user";
-
-    }
+   
     
     public static function getAllDrivers()
     {
@@ -25,28 +19,35 @@ class Model
     }
 
 
-    public static function CarRides(){
-        $sql = "SELECT c.id_car, r.id_ride 
+    public static function getRidesByCar($idCar)
+    {
+        $sql = "SELECT c.id_car, r.id_ride, r.id_car, r.time_left, r.time_arrived, r.place_left, r.place_arrived, r.km_before,
+        r.km_after, r.note
                 FROM cars c 
                 JOIN cars_rides cr ON c.id_car = cr.id_car
-                JOIN rides r ON cr.id_ride = r.id_ride";
+                JOIN rides r ON cr.id_ride = r.id_ride
+                WHERE c.id_car = '$idCar'";
+        $result = Database::query($sql);
+        while ($row = $result->fetch_assoc()) {
+            $carRides[] = $row;
+        }
+        return ($result->num_rows > 0) ? $carRides : false;
     }
 
     
     public static function getAllDriverRides($idUser)
     {
-        $sql = "SELECT r.id_ride
+        $sql = "SELECT u.id_user, r.id_ride, r.id_car, r.time_left, r.time_arrived, r.place_left, r.place_arrived, r.km_before,
+                r.km_after, r.note
                 FROM rides r
                 JOIN users_rides ur ON r.id_ride = ur.id_ride
                 JOIN users u ON ur.id_user = u.id_user
                 WHERE u.id_user = '$idUser'";
         $result = Database::query($sql);
-        var_dump($result);
         while ($row = $result->fetch_assoc()) {
-             $rides  = $row;
+            $userRides[] = $row;
         }
-        return $rides;
-
+        return $userRides;
     }
 
     public static function getIdByEmail($email)
@@ -62,9 +63,6 @@ class Model
         return $id;
     }
 
-    
-
-
     public static function authenticate($email, $password)
     {
         $hashedPassword = md5($password . self::SALT);
@@ -73,7 +71,6 @@ class Model
         WHERE email LIKE '$email' AND password LIKE '$hashedPassword'
         ";
         $result = Database::query($sql);
-        var_dump($result);
         if ($result->num_rows > 0) {
             return true;
         }
@@ -174,7 +171,7 @@ class Model
 
     public static function editCar($type, $SPZ)
     {
-        $sql="UPDATE cars SET 
+        $sql = "UPDATE cars SET 
         type = '$type',
         SPZ = '$SPZ'";
 
@@ -209,7 +206,7 @@ class Model
 
     public static function editRides($idUser, $idCar, $timeLeft, $timeArrived, $placeLeft, $placeArrived, $kmBefore, $kmAfter, $note, $state)
     {
-        $sql="UPDATE rides SET
+        $sql = "UPDATE rides SET
               id_user = '$idUser',
               id_car= '$idCar',
               time_left = '$timeLeft',
@@ -227,7 +224,7 @@ class Model
 
     public static function addCar($type, $SPZ)
     {
-        $sql="INSERT INTO cars(type, SPZ)
+        $sql = "INSERT INTO cars(type, SPZ)
         VALUES ('$type', '$SPZ')";
         return  Database::query($sql);
     }
@@ -235,23 +232,19 @@ class Model
     public static function addUser($role, $firstname, $surname, $email, $password)
     {
         $hashedPassword = md5($password . self::SALT);
-        $sql="INSERT INTO users (id_role, firstname, surname, email, password)
+        $sql = "INSERT INTO users (id_role, firstname, surname, email, password)
         VALUES ('$role', '$firstname', '$surname', '$email', '$hashedPassword')";
         return Database::query($sql);
     }
 
 
     public static function addRide($car, $timeLeft, $timeArrived, $placeLeft, $placeArrived, $kmBefore, $kmAfter, $note)
-    {  
-        $timeLeft = str_replace("T", " ", $timeLeft);
-        $timeArrived = str_replace("T", " ", $timeArrived);
-        $timeLeft .= ":00";
-        $timeArrived .= ":00";
-
-        var_dump($timeLeft, $timeArrived);
-        
+    {
+        $timeLeft = date("Y-m-d H:i:s", strtotime($timeLeft));
+        $timeArrived = date("Y-m-d H:i:s", strtotime($timeArrived));
     
-        $sql="INSERT INTO rides (`id_car`, `time_left`, `time_arrived`, `place_left`, `place_arrived`, `km_before`, `km_after`, `note`)
+        $sql = "INSERT INTO rides 
+        (`id_car`, `time_left`, `time_arrived`, `place_left`, `place_arrived`, `km_before`, `km_after`, `note`)
         VALUES ('$car', '$timeLeft', '$timeArrived','$placeLeft', '$placeArrived', '$kmBefore', '$kmAfter', '$note')";
         return Database::query($sql);
     }

@@ -5,8 +5,8 @@ class Database
     private $_connection;
     private static $_instance; //The single instance
     private $_host = "localhost";
-    private $_username = "root";
-    private $_password = "root";
+    private $_username = "admin";
+    private $_password = "admin";
     private $_database = "mop";
 
     /*
@@ -33,7 +33,8 @@ class Database
             $this->_host,
             $this->_username,
             $this->_password,
-            $this->_database
+            $this->_database,
+            "3308"
         );
 
         $this->_connection->set_charset('utf8mb4');
@@ -42,7 +43,7 @@ class Database
         if (mysqli_connect_error()) {
             trigger_error(
                 "Failed to conencto to MySQL: " . mysql_connect_error(),
-                 E_USER_ERROR
+                E_USER_ERROR
             );
         }
     }
