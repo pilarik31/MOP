@@ -35,7 +35,7 @@ class Model
     
     public static function getAllDriverRides($idUser)
     {
-        $sql = "SELECT u.id_user, r.id_ride
+        $sql = "SELECT r.id_ride
                 FROM rides r
                 JOIN users_rides ur ON r.id_ride = ur.id_ride
                 JOIN users u ON ur.id_user = u.id_user

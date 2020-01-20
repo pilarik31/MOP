@@ -61,7 +61,7 @@ foreach ($rides as $ride) {
     
 } else {
     var_dump($_SESSION);
-    $driverRides = Model::getAllDriverRides(); 
+    $driverRides = Model::getAllDriverRides( $_SESSION["userId"]); 
     var_dump($driverRides);
     ?>
     
