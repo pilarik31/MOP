@@ -5,8 +5,8 @@ class Database
     private $_connection;
     private static $_instance; //The single instance
     private $_host = "localhost";
-    private $_username = "admin";
-    private $_password = "admin";
+    private $_username = "root";
+    private $_password = "root";
     private $_database = "mop";
 
     /*
@@ -33,8 +33,8 @@ class Database
             $this->_host,
             $this->_username,
             $this->_password,
-            $this->_database,
-            "3308"
+            $this->_database
+            
         );
 
         $this->_connection->set_charset('utf8mb4');
