@@ -65,7 +65,7 @@ session_start();
                     } ?>
                      <li class="nav-item">
                     <a class="nav-link" href="logout.php">
-                        LOGOUT </a>
+                        <b>Odhlásit se</b> </a>
                 </li>
 
                                

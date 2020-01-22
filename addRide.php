@@ -10,7 +10,7 @@ $submit = filter_input(INPUT_POST, "submit");
 
 if (isset($submit)) {
     $idUser = filter_input(INPUT_POST, "user");
-    $car =  filter_input(INPUT_POST, "car");
+    $car = filter_input(INPUT_POST, "car");
     $timeLeft = filter_input(INPUT_POST, "timeL");
     $timeArrived = filter_input(INPUT_POST, "timeA");
     $placeLeft = filter_input(INPUT_POST, "placeL");
@@ -19,17 +19,14 @@ if (isset($submit)) {
     $kmAfter = filter_input(INPUT_POST, "kmAfter");
     $note = filter_input(INPUT_POST, "note");
 
-
-
-
-
     $isAdded = Model::addRide(
       $idUser, $car, $timeLeft, $timeArrived, $placeLeft, $placeArrived, $kmBefore, $kmAfter, $note
+
+     
     );
+    var_dump($isAdded);
 
     
-
-
     if ($isAdded) {
         echo "zápis proběhl v pořádku";
     } else {
@@ -41,16 +38,12 @@ if (isset($submit)) {
 
   <form action="addRide.php" method="post">
 
-    <!-- <label for="role">Role</label> <br>
-    <input type="radio" name="role" value="" >Admin<br>
-    <input type="radio" name="role" value="" >Manažer vozového parku<br>
-    <input type="radio" name="role" value="" >Řidič<br> --> 
-   
-    
-   
-    <label for="user">Řidič</label>
-    <input type="text" name="user " class="form-control" id=""  placeholder="" >
-    <label for="car">Vozidlo</label><br>
+    <label for="user">Řidič</label> <br>
+    <input type="radio" name="user" value="4" >1<br>
+    <input type="radio" name="user" value="4" >2<br>
+    <input type="radio" name="user" value="4" >3<br> 
+
+  <label for="car">Vozidlo</label><br>
   <select id="car" name="car">
   <option value="1">1</option>
   <option value="2">1</option>

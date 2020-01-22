@@ -246,7 +246,7 @@ class Model
         $timeLeft = date("Y-m-d H:i:s", strtotime($timeLeft));
         $timeArrived = date("Y-m-d H:i:s", strtotime($timeArrived));
     
-        $sql = "INSERT INTO rides (id_car, id_user, time_left, time_arrived, place_left, place_arrived, km_before, km_after, note)
+        $sql = "INSERT INTO rides ( id_user, id_car, time_left, time_arrived, place_left, place_arrived, km_before, km_after, note)
         VALUES ('$idUser','$car', '$timeLeft', '$timeArrived','$placeLeft', '$placeArrived', '$kmBefore', '$kmAfter', '$note')";
         return Database::query($sql);
     }

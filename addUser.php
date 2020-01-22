@@ -39,6 +39,7 @@ var_dump($submit);
 
 
 <form action="addUser.php" method="post">
+
   <label for="role">Role</label><br>
   <select id="role" name="role">
   <option value="1">Admin</option>

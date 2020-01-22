@@ -23,6 +23,7 @@ if (isset($submit)) {
     $isAdded = Model::addCar($type, $SPZ);
 
 
+  
     if ($isAdded) {
         echo "zápis proběhl v pořádku";
     } else {
