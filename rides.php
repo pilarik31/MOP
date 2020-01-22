@@ -1,14 +1,12 @@
 <?php
 include_once  "header.php";
-include_once "nav.php";
-session_start();
 if (!($_SESSION["userRole"] == "1" || $_SESSION["userRole"] == "4")) {
     header("location:index.php");
 }
 ?>
 <br><br>
-<h3>Rides</h3>
-<a class="btn btn-secondary background-btn" href="addRide.php">Add ride</a>
+<h3>Jízdy</h3>
+<a class="btn btn-secondary background-btn" href="addRide.php">Přidat jízdu</a>
 <div class="table-responsive">
     <?php if ($_SESSION["userRole"] == "1") {
             $rides = Model::getAllRides(); ?>
@@ -16,16 +14,16 @@ if (!($_SESSION["userRole"] == "1" || $_SESSION["userRole"] == "4")) {
     <table class=" table table-striped ">
         <thead>
             <tr>
-                <th>id</th>
-                <th>car</th>
-                <th>TL</th>
-                <th>TA</th>
-                <th>PL</th>
-                <th>PA</th>
-                <th>km</th>
-                <th>km</th>
-                <th>note</th>
-                <th>edit</th>
+                <th>ID jízdy</th>
+                <th>Vozidlo</th>
+                <th>Čas a datum odjezdu</th>
+                <th>Čas a datum příjezdu</th>
+                <th>Místo odjezdu</th>
+                <th>Místo příjezdu</th>
+                <th>Počet kilometrů před</th>
+                <th>Počet kilometrů po</th>
+                <th>Poznámka</th>
+                <th>Úprava</th>
             </tr>
         </thead>
         <tbody>
@@ -45,7 +43,7 @@ if (!($_SESSION["userRole"] == "1" || $_SESSION["userRole"] == "4")) {
                 <td><?= $ride['km_after'] ?></td>
                 <td><?= $ride['note'] ?></td>
                 <td>
-                    <a href="edit_ride.php?id_ride=<?= $ride['id_ride'] ?>">edit </a>
+                    <a href="edit_ride.php?id_ride=<?= $ride['id_ride'] ?>">upravit </a>
                 </td>
 
 

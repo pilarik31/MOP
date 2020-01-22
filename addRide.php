@@ -1,34 +1,33 @@
 <?php
 include_once "header.php";
-include_once "nav.php";
 if (!($_SESSION["userRole"] == "1" || $_SESSION["userRole"] == "4")) {
     header("location:index.php");
 }
+
 $submit = filter_input(INPUT_POST, "submit");
 
 
 
 if (isset($submit)) {
+    $idUser = filter_input(INPUT_POST, "user");
     $car =  filter_input(INPUT_POST, "car");
-
-    $placeLeft = filter_input(INPUT_POST, "placeL");
-    $placeArrived = filter_input(INPUT_POST, "placeA");
     $timeLeft = filter_input(INPUT_POST, "timeL");
     $timeArrived = filter_input(INPUT_POST, "timeA");
-    $note = filter_input(INPUT_POST, "note");
+    $placeLeft = filter_input(INPUT_POST, "placeL");
+    $placeArrived = filter_input(INPUT_POST, "placeA");
     $kmBefore = filter_input(INPUT_POST, "kmBefore");
     $kmAfter = filter_input(INPUT_POST, "kmAfter");
+    $note = filter_input(INPUT_POST, "note");
+
+
+
+
 
     $isAdded = Model::addRide(
-        $car,
-        $timeLeft,
-        $timeArrived,
-        $placeLeft,
-        $placeArrived,
-        $kmBefore,
-        $kmAfter,
-        $note
+      $idUser, $car, $timeLeft, $timeArrived, $placeLeft, $placeArrived, $kmBefore, $kmAfter, $note
     );
+
+    
 
 
     if ($isAdded) {
@@ -48,27 +47,30 @@ if (isset($submit)) {
     <input type="radio" name="role" value="" >Řidič<br> --> 
    
     
-    <label for="role">Car</label><br>
-  <select id="role" name="car">
+   
+    <label for="user">Řidič</label>
+    <input type="text" name="user " class="form-control" id=""  placeholder="" >
+    <label for="car">Vozidlo</label><br>
+  <select id="car" name="car">
   <option value="1">1</option>
   <option value="2">1</option>
   <option value="3">1</option>
   <option value="4">1</option> 
-  </select><br>
-    <label for="placeL">Place Left</label>
+  </select><br> 
+    <label for="placeL">Místo odjezdu</label>
     <input type="text" name="placeL" class="form-control" id=""  placeholder="" >
-    <label for="placeA">Place Arrive</label>
+    <label for="placeA">Místo příjezdu</label>
     <input type="text" name="placeA" class="form-control" id=""  placeholder="" >
-    <label for="timeL">Time L</label>
+    <label for="timeL">Datum a čas odjezdu</label>
     <input type="datetime-local" name="timeL" class="form-control" id=""  placeholder="" >
-    <label for="timeA">Time A</label>
+    <label for="timeA">Datum a čas příjezdu</label>
     <input type="datetime-local" name="timeA" class="form-control" id=""  placeholder="" >
-    <label for="kmBefore">km</label>
+    <label for="kmBefore">Kilometry před</label>
     <input type="text" name="kmBefore" class="form-control" id=""  placeholder="" >
-    <label for="kmAfter">km</label>
+    <label for="kmAfter">Kilometry po</label>
     <input type="text" name="kmAfter" class="form-control" id=""  placeholder="" >
-    <label for="note">Note</label>
+    <label for="note">Poznámka</label>
     <input type="text" name="note" class="form-control" id=""  placeholder="" >
     <br>
-    <input type="submit" value="odeslat" name="submit">
+    <input type="submit" value="přidat" name="submit">
   </form>

@@ -19,6 +19,8 @@ class Model
     }
 
 
+
+
     public static function getRidesByCar($idCar)
     {
         $sql = "SELECT c.id_car, r.id_ride, r.id_car, r.time_left, r.time_arrived, r.place_left, r.place_arrived, r.km_before,
@@ -147,7 +149,9 @@ class Model
 
     public static function getAllRides()
     {
-        $sql = "SELECT * FROM rides;";
+        $sql = "SELECT * FROM rides
+       
+            ;";
         $result = Database::query($sql);
         while ($row = $result->fetch_assoc()) {
             $rides[] = $row;
@@ -204,7 +208,7 @@ class Model
         return Database::query($sql);
     }
 
-    public static function editRides($idUser, $idCar, $timeLeft, $timeArrived, $placeLeft, $placeArrived, $kmBefore, $kmAfter, $note, $state)
+    public static function editRides($id_ride, $idUser, $idCar, $timeLeft, $timeArrived, $placeLeft, $placeArrived, $kmBefore, $kmAfter, $note)
     {
         $sql = "UPDATE rides SET
               id_user = '$idUser',
@@ -215,9 +219,8 @@ class Model
               place_arrived = '$placeArrived',
               km_before = '$kmBefore',
               km_after = '$kmAfter',
-              note = '$note',
-              state = '$state',
-        WHERE id_ride = $id_ride";
+              note = '$note'
+            WHERE id_ride = $id_ride";
 
         return  Database::query($sql);
     }
@@ -238,14 +241,13 @@ class Model
     }
 
 
-    public static function addRide($car, $timeLeft, $timeArrived, $placeLeft, $placeArrived, $kmBefore, $kmAfter, $note)
+    public static function addRide($idUser, $car, $timeLeft, $timeArrived, $placeLeft, $placeArrived, $kmBefore, $kmAfter, $note)
     {
         $timeLeft = date("Y-m-d H:i:s", strtotime($timeLeft));
         $timeArrived = date("Y-m-d H:i:s", strtotime($timeArrived));
     
-        $sql = "INSERT INTO rides 
-        (`id_car`, `time_left`, `time_arrived`, `place_left`, `place_arrived`, `km_before`, `km_after`, `note`)
-        VALUES ('$car', '$timeLeft', '$timeArrived','$placeLeft', '$placeArrived', '$kmBefore', '$kmAfter', '$note')";
+        $sql = "INSERT INTO rides (id_car, id_user, time_left, time_arrived, place_left, place_arrived, km_before, km_after, note)
+        VALUES ('$idUser','$car', '$timeLeft', '$timeArrived','$placeLeft', '$placeArrived', '$kmBefore', '$kmAfter', '$note')";
         return Database::query($sql);
     }
 }

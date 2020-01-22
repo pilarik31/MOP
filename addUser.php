@@ -1,8 +1,6 @@
 <?php
 include_once "header.php";
-include_once "nav.php";
 
-session_start();
 if (!($_SESSION["userRole"]=="1")) {
     header("location:index.php");
 
@@ -49,17 +47,17 @@ var_dump($submit);
   <option value="4">Rider</option> 
   </select><br>
 
-  <label for="name">Firstname</label>
+  <label for="name">Jméno</label>
   <input type="text" name="firstname" class="form-control" id="firstname" aria-describedby="name" placeholder=""
     value="">
 
-  <label for="surname">Surname</label>
+  <label for="surname">Přijmení</label>
   <input type="text" name="surname" class="form-control" id="" aria-describedby="" placeholder="" value="">
 
-  <label for="email">email</label>
+  <label for="email">Email</label>
   <input type="email" name="email" class="form-control" id="" aria-describedby="" placeholder="" value="">
 
-  <label for="password">password</label>
+  <label for="password">Heslo</label>
   <input type="password" name="password" class="form-control" id="" aria-describedby="" placeholder="" value="">
 
 
@@ -67,5 +65,5 @@ var_dump($submit);
 
 
   <br>
-  <input type="submit" value="odeslat" name="submit">
+  <input type="submit" value="přidat" name="submit">
 </form>

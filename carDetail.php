@@ -1,7 +1,5 @@
 <?php
 include_once 'header.php';
-include_once 'nav.php';
-session_start();
 
 $carRides = Model::getRidesByCar(filter_input(INPUT_GET, 'id_car'));
 ?>

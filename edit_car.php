@@ -1,8 +1,6 @@
 <?php
 include_once "header.php";
-include_once "nav.php";
 
-session_start();
 if (!($_SESSION["userRole"]=="1" || $_SESSION["userRole"] == "3")) {
     header("location:index.php");
 
@@ -28,7 +26,7 @@ $car = Model::getCarById($idCar);
 ?>
 <form action="" method="post">
 
-<label for="type">Type</label>
+<label for="type">Typ</label>
   <input type="text" name="type" class="form-control" id="type"
      value="<?= $car['type'] ?>">
 
@@ -41,5 +39,5 @@ $car = Model::getCarById($idCar);
 
 
   <br>
-  <input type="submit" value="submit" name ="submit">
+  <input type="submit" value="uložit" name ="submit">
 </form>

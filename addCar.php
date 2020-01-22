@@ -1,7 +1,6 @@
 <?php
-include_once "nav.php";
 include_once "header.php";
-session_start();
+
 
 if (!($_SESSION["userRole"]=="1" || $_SESSION["userRole"] == "3")) {
     header("location:index.php");
@@ -38,7 +37,7 @@ if (isset($submit)) {
 
   
 
-  <label for="type">Type</label>
+  <label for="Typ vozidla">Type</label>
   <input type="text" name="type" class="form-control" id="type" aria-describedby="name" placeholder=""
     value="">
 
@@ -49,7 +48,7 @@ if (isset($submit)) {
   <?php
   if (!($_SESSION['userRole'] == '2' || $_SESSION['userRole'] == '4')) {
     ?>
-    <label for="userSelect">Users</label>
+    <label for="userSelect">Uživatelé</label>
     <select multiple id="userSelect" name="userSelect[]">
     <?php
     foreach ($drivers as $user) {
@@ -67,5 +66,5 @@ if (isset($submit)) {
 
 
   <br>
-  <input type="submit" value="odeslat" name="submit">
+  <input type="submit" value="přidat" name="submit">
 </form>

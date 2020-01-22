@@ -1,8 +1,6 @@
 <?php
-include_once  "header.php";
-
+require_once __DIR__ .DIRECTORY_SEPARATOR . "vendor". DIRECTORY_SEPARATOR  . "autoload.php";
 session_start();
-
 $submit = filter_input(INPUT_POST, 'loginSubmit');
 if (!empty($submit)) {
     echo "Formulář byl odeslán";

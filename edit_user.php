@@ -1,7 +1,5 @@
 <?php
 include_once "header.php";
-include_once "nav.php";
-session_start();
   
 if (!($_SESSION["userRole"]=="1")) {
     header("location:index.php");
@@ -54,5 +52,5 @@ $user = Model::getUserById($idUser);
 
 
   <br>
-  <input type="submit" value="submit" name = "submit">
+  <input type="submit" value="uložit" name = "submit">
 </form>

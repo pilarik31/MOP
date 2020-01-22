@@ -1,7 +1,5 @@
 <?php
 include_once "header.php";
-include_once "nav.php";
-session_start();
 if (!($_SESSION["userRole"]=="1" )) {
     header("location:index.php");
 
@@ -23,18 +21,19 @@ $employees = Model::getAllUsers();
 
 ?>
     <br>
-    <h2>Users</h2>
-    <a class="btn btn-secondary background-btn" href="addUser.php">Add user</a>
+    <h2>Uživatelé</h2>
+    <a class="btn btn-secondary background-btn" href="addUser.php">Přidat uživatele</a>
 
     <div class="table-responsive">
         <table class=" tbl table table-striped table-sm">
             <thead>
                 <tr>
-                    <th>id</th>
-                    <th>name</th>
-                    <th>surname</th>
-                    <th>email</th>
-                    <th>edit</th>
+                    <th>ID</th>
+                    <th>Jméno</th>
+                    <th>Přijmení</th>
+                    <th>Email</th>
+                    <th>Úprava</th>
+                    <th>Stav</th>
 
                 </tr>
             </thead>
@@ -47,7 +46,8 @@ $employees = Model::getAllUsers();
                     <td> <?php echo $employee['firstname'] ?></td>
                     <td> <?php echo $employee['surname'] ?></td>
                     <td> <?php echo $employee['email'] ?></td>
-                    <td> <a href="edit_user.php?id_user=<?= $employee['id_user'] ?>">edit </a> </td>
+                    <td> <a href="edit_user.php?id_user=<?= $employee['id_user'] ?>">upravit </a> </td>
+                    <td>  </td>
                 </tr> <?php
             }
                 ?>
