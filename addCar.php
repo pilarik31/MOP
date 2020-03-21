@@ -14,6 +14,7 @@ $drivers = Model::getAllDrivers();
 if (isset($submit)) {
     $type = filter_input(INPUT_POST, "type");
     $SPZ = filter_input(INPUT_POST, "SPZ");
+    var_dump($_POST['userSelect']);
     foreach ($_POST['userSelect'] as $user) {
       $usersSelected[] = $user;
     }

@@ -1,6 +1,10 @@
 <?php
 require_once __DIR__ .DIRECTORY_SEPARATOR . "vendor". DIRECTORY_SEPARATOR  . "autoload.php";
 session_start();
+if (!$_SESSION["logged"] ) {
+header("location:login.php");
+}
+
 
 ?>
 <!DOCTYPE html>

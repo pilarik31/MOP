@@ -39,5 +39,5 @@ $car = Model::getCarById($idCar);
 
 
   <br>
-  <input type="submit" value="uložit" name ="submit">
+  <input type="submit" value="upravit" name ="submit">
 </form>

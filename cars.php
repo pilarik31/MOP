@@ -19,6 +19,7 @@ $cars = Model::getAllCars();
                 <th>ID</th>
                 <th>Typ vozidla</th>
                 <th>SPZ</th>
+                <th>KM celkem</th>
                 <th>Úprava</th>
 
             </tr>
@@ -30,6 +31,7 @@ $cars = Model::getAllCars();
                     <td><?= $car['id_car'] ?></td>
                     <td><a href="carDetail.php?id_car=<?= $car['id_car'] ?>"><?= $car['type'] ?></a></td>
                     <td><?= $car['SPZ'] ?></td>
+                    <td><?= $car['total_km'] ?></td>
                     <td>
                         <a href="edit_car.php?id_car=<?= $car['id_car'] ?>">upravit </a>
                     </td>

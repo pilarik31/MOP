@@ -16,6 +16,7 @@ if (!($_SESSION["userRole"] == "1" || $_SESSION["userRole"] == "4")) {
             <tr>
                 <th>ID jízdy</th>
                 <th>Vozidlo</th>
+                <th>Uživatel</th>
                 <th>Čas a datum odjezdu</th>
                 <th>Čas a datum příjezdu</th>
                 <th>Místo odjezdu</th>
@@ -23,6 +24,7 @@ if (!($_SESSION["userRole"] == "1" || $_SESSION["userRole"] == "4")) {
                 <th>Počet kilometrů před</th>
                 <th>Počet kilometrů po</th>
                 <th>Poznámka</th>
+                <th>Status</th>
                 <th>Úprava</th>
             </tr>
         </thead>
@@ -34,7 +36,8 @@ if (!($_SESSION["userRole"] == "1" || $_SESSION["userRole"] == "4")) {
 
                 <td><?= $ride['id_ride'] ?></td>
 
-                <td><?= $ride['id_car'] ?></td>
+                <td><?= $ride['type'] ?></td>
+                <th><?= $ride['firstname'] . " " . $ride['surname']?></td>
                 <td><?= date("j.n.Y - G:i:s", strtotime($ride['time_left'])) ?></td>
                 <td><?= date("j.n.Y - G:i:s", strtotime($ride['time_arrived'])) ?></td>
                 <td><?= $ride['place_left'] ?></td>
@@ -42,6 +45,7 @@ if (!($_SESSION["userRole"] == "1" || $_SESSION["userRole"] == "4")) {
                 <td><?= $ride['km_before'] ?></td>
                 <td><?= $ride['km_after'] ?></td>
                 <td><?= $ride['note'] ?></td>
+                <td><?= $ride['state'] ?></td>
                 <td>
                     <a href="edit_ride.php?id_ride=<?= $ride['id_ride'] ?>">upravit </a>
                 </td>
@@ -52,7 +56,10 @@ if (!($_SESSION["userRole"] == "1" || $_SESSION["userRole"] == "4")) {
             </tr>
                 <?php
             } ?></tbody>
-    </table> <?php
+    </table> 
+    <?php
+
+    // jízdy uživatele
     } else {
         $driverRides = Model::getAllDriverRides($_SESSION['userId']['id_user']);
         ?>
@@ -60,16 +67,18 @@ if (!($_SESSION["userRole"] == "1" || $_SESSION["userRole"] == "4")) {
     <table class=" table table-striped ">
         <thead>
             <tr>
-                <th>id</th>
-                <th>car</th>
-                <th>TL</th>
-                <th>TA</th>
-                <th>PL</th>
-                <th>PA</th>
-                <th>km</th>
-                <th>km</th>
-                <th>note</th>
-                <th>edit</th>
+                <th>ID jízdy</th>
+                <th>Vozidlo</th>
+                <th>Uživatel</th>
+                <th>Čas a datum odjezdu</th>
+                <th>Čas a datum příjezdu</th>
+                <th>Místo odjezdu</th>
+                <th>Místo příjezdu</th>
+                <th>Počet kilometrů před</th>
+                <th>Počet kilometrů po</th>
+                <th>Poznámka</th>
+                <th>Status</th>
+                <th>Úprava</th>
 
 
             </tr>
@@ -81,6 +90,7 @@ if (!($_SESSION["userRole"] == "1" || $_SESSION["userRole"] == "4")) {
 
                 <td><?= $driverRide['id_ride'] ?></td>
                 <td><?= $driverRide['id_car'] ?></td>
+                <th><?= $ride['firstname'] . $ride['surname']?></td>
                 <td><?= date("j.n.Y - G:i:s", strtotime($driverRide['time_left'])) ?></td>
                 <td><?= date("j.n.Y - G:i:s", strtotime($driverRide['time_arrived'])) ?></td>
                 <td><?= $driverRide['place_left'] ?></td>
@@ -88,6 +98,8 @@ if (!($_SESSION["userRole"] == "1" || $_SESSION["userRole"] == "4")) {
                 <td><?= $driverRide['km_before'] ?></td>
                 <td><?= $driverRide['km_after'] ?></td>
                 <td><?= $driverRide['note'] ?></td>
+                <td><?= $driverRide['state'] ?></td>
+
 
                 <td>
                     <a href="edit_ride.php?id_ride=<?= $driverRide['id_ride'] ?>">edit </a>

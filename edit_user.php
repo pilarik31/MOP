@@ -3,10 +3,10 @@ include_once "header.php";
   
 if (!($_SESSION["userRole"]=="1")) {
     header("location:index.php");
-
 }
+$roles = Model::getAllRoles();
 
- $idUser = filter_input(INPUT_GET, 'id_user');
+$idUser = filter_input(INPUT_GET, 'id_user');
 
 
 $submit = filter_input(INPUT_POST, 'submit');
@@ -16,22 +16,39 @@ $submit = filter_input(INPUT_POST, 'submit');
 $id_role = filter_input(INPUT_POST, 'role');
 $firstname= filter_input(INPUT_POST, 'firstname');
 $surname = filter_input(INPUT_POST, 'surname');
-$email= filter_input(INPUT_POST,'email');
-$password = filter_input(INPUT_POST,'password');
+$email= filter_input(INPUT_POST, 'email');
+$password = filter_input(INPUT_POST, 'password');
 
 
-if (isset($submit)){
-  (Model::editUser($idUser, $id_role, $firstname, $surname, $email, $password));
+if (isset($submit)) {
+    Model::editUser($idUser, $id_role, $firstname, $surname, $email, $password);
 }
+
 
 $user = Model::getUserById($idUser);
 
 ?>
 <form action="" method="post">
 
-<label for="name">Role</label>
-  <input type="text" name="role" class="form-control" id="role" aria-describedby="name"
-    placeholder="firstname" value="<?= $user['id_role'] ?>">
+  <select id="role" name="role">
+
+
+
+ <?php
+   foreach ($roles as $role) { 
+    if( $role['id_role'] == $user['id_role']
+    )
+       {?> <option value="<?= $role['id_role'] ?> "selected><?= $role['role_name'] ?></option>
+<?php continue; 
+       }?>
+    <option value="<?= $role['id_role'] ?>"><?= $role['role_name'] ?></option>
+
+  <?php
+  
+
+}
+?>
+ </select><br>
 
   <label for="name">Jméno</label>
   <input type="text" name="firstname" class="form-control" id="firstname" aria-describedby="name"
@@ -52,5 +69,5 @@ $user = Model::getUserById($idUser);
 
 
   <br>
-  <input type="submit" value="uložit" name = "submit">
+  <input type="submit" value="upravit" name="submit">
 </form>

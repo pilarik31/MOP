@@ -18,7 +18,7 @@ class Model
         return $drivers;
     }
 
-
+    
 
 
     public static function getRidesByCar($idCar)
@@ -97,6 +97,7 @@ class Model
         while ($row = $result->fetch_assoc()) {
             $ride = $row;
         }
+
         return $ride;
     }
 
@@ -122,13 +123,28 @@ class Model
         }
     }
 
+    public static function getUserRoleName($idRole)
+    {       
+        $sql = "SELECT role_name FROM roles
+        WHERE id_role LIKE '$idRole' ";
+        $result = Database::query($sql);
+        while ($row = $result->fetch_assoc()) {
+            $idRole = $row;
+        }
+        return $idRole;
+
+    }
+    
+
     public static function getAllCars()
     {
-        $sql = 'SELECT * FROM cars;';
+        $sql = 'SELECT c.id_car, c.type, c.SPZ, SUM(km_after - km_before) AS total_km FROM cars c
+        JOIN rides r ON c.id_car = r.id_car
+        GROUP BY c.id_car';
         $result = Database::query($sql);
-
+        
         while ($row = $result->fetch_assoc()) {
-            $cars[] = $row;
+            $cars[]= $row;
         }
 
         return $cars;
@@ -141,7 +157,6 @@ class Model
         while ($row = $result->fetch_assoc()) {
             $employees[] = $row;
         }
-
         return $employees;
     }
 
@@ -149,13 +164,17 @@ class Model
 
     public static function getAllRides()
     {
-        $sql = "SELECT * FROM rides
-       
-            ;";
+        $sql = "SELECT r.id_ride, u.firstname, u.surname, c.type, r.time_left, r.time_arrived, r.place_left, r.place_arrived, r.km_before, r.km_after, r.note, r.state
+        FROM rides r
+        JOIN cars_rides cr ON r.id_ride = cr.id_ride
+        JOIN cars c ON cr.id_car = c.id_car
+        JOIN users_rides ur ON r.id_ride = ur.id_ride
+        JOIN users u ON ur.id_user = u.id_user;";
         $result = Database::query($sql);
         while ($row = $result->fetch_assoc()) {
             $rides[] = $row;
         }
+        
       
         return $rides;
     }
@@ -208,7 +227,7 @@ class Model
         return Database::query($sql);
     }
 
-    public static function editRides($id_ride, $idUser, $idCar, $timeLeft, $timeArrived, $placeLeft, $placeArrived, $kmBefore, $kmAfter, $note)
+    public static function editRides($id_ride, $idUser, $idCar, $timeLeft, $timeArrived, $placeLeft, $placeArrived, $kmBefore, $kmAfter, $note, $state)
     {
         $sql = "UPDATE rides SET
               id_user = '$idUser',
@@ -219,7 +238,8 @@ class Model
               place_arrived = '$placeArrived',
               km_before = '$kmBefore',
               km_after = '$kmAfter',
-              note = '$note'
+              note = '$note',
+              state = '$state'
             WHERE id_ride = $id_ride";
 
         return  Database::query($sql);
@@ -241,13 +261,26 @@ class Model
     }
 
 
-    public static function addRide($idUser, $car, $timeLeft, $timeArrived, $placeLeft, $placeArrived, $kmBefore, $kmAfter, $note)
+    public static function addRide($idUser, $car, $timeLeft, $timeArrived, $placeLeft, $placeArrived, $kmBefore, $kmAfter, $note, $state)
     {
         $timeLeft = date("Y-m-d H:i:s", strtotime($timeLeft));
         $timeArrived = date("Y-m-d H:i:s", strtotime($timeArrived));
-    
-        $sql = "INSERT INTO rides ( id_user, id_car, time_left, time_arrived, place_left, place_arrived, km_before, km_after, note)
-        VALUES ('$idUser','$car', '$timeLeft', '$timeArrived','$placeLeft', '$placeArrived', '$kmBefore', '$kmAfter', '$note')";
+
+        $sql = "INSERT INTO `rides` (`id_user`, `id_car`, `time_left`, `time_arrived`, `place_left`, `place_arrived`, `km_before`, `km_after`, `note`, `state`)
+        VALUES ('$idUser', '$car', '$timeLeft', '$timeArrived', '$placeLeft', '$placeArrived', '$kmBefore', '$kmAfter', '$note', '$state');";
+
+        $sql1 = "SELECT id_ride FROM rides ORDER BY id_ride DESC LIMIT 1";
+        $result = Database::query($sql1);
+        while ($row = $result->fetch_assoc()) {
+            $ride = $row;
+            var_dump($ride);
+        }
+      
+        $sql2 = sprintf("INSERT INTO cars_rides (id_car, id_ride)
+        VALUES ('$car', '%s')", $ride['id_ride']);
+       $result = Database::query($sql2);
+
+
         return Database::query($sql);
     }
 }

@@ -11,6 +11,7 @@ if (!empty($submit)) {
         $_SESSION["logged"] = true;
         $_SESSION["userRole"] = Model::getUserRole($email);
         $_SESSION["userId"] = Model::getIdByEmail($email);
+      
         header("location:index.php");
     } else {
         header("location:login.php");
