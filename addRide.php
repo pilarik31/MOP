@@ -8,6 +8,9 @@ $submit = filter_input(INPUT_POST, "submit");
 
 $cars = Model::getAllCars();
 $users = Model::getAllUsers();
+$getCars = Model::getCarsByUserId($id_user);
+
+
 
 if (isset($submit)) {
     $idUser = filter_input(INPUT_POST, "user");
@@ -44,6 +47,19 @@ var_dump($cars);
 
 
 
+  
+
+
+  <label for="user">Řidič</label><br>
+  <select id="user" name="user">
+  <?php 
+  foreach ($users as $user) {?>
+
+  <option value="<?= $user['firstname']?> "> <?= $user['firstname'] ?> <?php
+  } ?>
+  </select><br> 
+  
+  
   <label for="car">Vozidlo</label><br>
   <select id="car" name="car">
   <?php 
@@ -52,17 +68,6 @@ var_dump($cars);
   <option value="<?= $car['SPZ']?> "> <?= $car['SPZ'] ?> <?php
   } ?>
   </select><br> 
-
-
-  <label for="user">Uživatel</label><br>
-  <select id="user" name="user">
-  <?php 
-  foreach ($users as $user) {?>
-
-  <option value="<?= $user['firstname']?> "> <?= $user['firstname'] ?> <?php
-  } ?>
-  </select><br> 
-   
   </select><br> 
 
 

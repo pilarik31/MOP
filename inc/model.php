@@ -139,7 +139,7 @@ class Model
     public static function getAllCars()
     {
         $sql = 'SELECT c.id_car, c.type, c.SPZ, SUM(km_after - km_before) AS total_km FROM cars c
-        JOIN rides r ON c.id_car = r.id_car
+        LEFT JOIN rides r ON c.id_car = r.id_car
         GROUP BY c.id_car';
         $result = Database::query($sql);
         
@@ -192,11 +192,13 @@ class Model
         return $roles;
     }
 
-    public static function editCar($type, $SPZ)
+    public static function editCar($type, $SPZ, $idCar)
     {
         $sql = "UPDATE cars SET 
         type = '$type',
-        SPZ = '$SPZ'";
+        SPZ = '$SPZ'
+        WHERE id_car = $idCar ";
+        
 
         
         return  Database::query($sql);
@@ -283,4 +285,23 @@ class Model
 
         return Database::query($sql);
     }
+
+    public static function getCarsByUserId($id_user)
+    {
+        $sql = "SELECT * FROM cars c
+        JOIN users_cars ur ON c.id_car = ur.id_car
+        WHERE ur.id_user = '$id_user'";;
+        $result = Database::query($sql);
+        
+        while ($row = $result->fetch_assoc()) {
+            $cars[]= $row;
+        } 
+
+        return $cars;
+    }
+
+  
 }
+
+
+

@@ -1,8 +1,10 @@
 <?php
 include_once 'header.php';
-if (!($_SESSION["userRole"] == "1" || $_SESSION["userRole"] == "3")) {
-    header("Location: index.php");
+if(!in_array($_SESSION["userRole"], array(1,2,3,4))) { 
+    header("location: index.php?restcrict=1"); // někdo řeší přes JS
 }
+
+
 
 $cars = Model::getAllCars();
 
@@ -29,8 +31,8 @@ $cars = Model::getAllCars();
             foreach ($cars as $car) {
             ?> <tr>
                     <td><?= $car['id_car'] ?></td>
-                    <td><a href="carDetail.php?id_car=<?= $car['id_car'] ?>"><?= $car['type'] ?></a></td>
-                    <td><?= $car['SPZ'] ?></td>
+                    <td><?= $car['type'] ?></a></td>
+                    <td><a href="carDetail.php?id_car=<?= $car['id_car'] ?>"><?= $car['SPZ'] ?></td>
                     <td><?= $car['total_km'] ?></td>
                     <td>
                         <a href="edit_car.php?id_car=<?= $car['id_car'] ?>">upravit </a>

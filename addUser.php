@@ -43,9 +43,9 @@ var_dump($submit);
   <label for="role">Role</label><br>
   <select id="role" name="role">
   <option value="1">Admin</option>
-  <option value="2">Manager</option>
-  <option value="3">Dispatcher</option>
-  <option value="4">Rider</option> 
+  <option value="2">Manažer</option>
+  <option value="3">Dispečer</option>
+  <option value="4">Řidič</option> 
   </select><br>
 
   <label for="name">Jméno</label>

@@ -18,7 +18,7 @@ $SPZ = filter_input(INPUT_POST, 'SPZ');
 
 
 if (isset($submit)){
-  Model::editCar($type, $SPZ);
+  Model::editCar($type, $SPZ,$idCar);
 }
 
 $car = Model::getCarById($idCar);

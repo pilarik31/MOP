@@ -2,12 +2,13 @@
 include_once "header.php";
 
 
-if (!($_SESSION["userRole"]=="1" || $_SESSION["userRole"] == "3")) {
+if (!($_SESSION["userRole"]=="1" || $_SESSION["userRole"] == "  3")) {
     header("location:index.php");
 
 }
 $submit = filter_input(INPUT_POST, "submit");
 $drivers = Model::getAllDrivers();
+
 
 
 
@@ -39,7 +40,7 @@ if (isset($submit)) {
 
   
 
-  <label for="Typ vozidla">Type</label>
+  <label for="Typ vozidla">Typ</label>
   <input type="text" name="type" class="form-control" id="type" aria-describedby="name" placeholder=""
     value="">
 

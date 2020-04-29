@@ -41,7 +41,7 @@ if (!($_SESSION["userRole"] == "1" || $_SESSION["userRole"] == "4")) {
                 <td><?= date("j.n.Y - G:i:s", strtotime($ride['time_left'])) ?></td>
                 <td><?= date("j.n.Y - G:i:s", strtotime($ride['time_arrived'])) ?></td>
                 <td><?= $ride['place_left'] ?></td>
-                <td><?= $ride['time_arrived'] ?></td>
+                <td><?= $ride['place_arrived'] ?></td>
                 <td><?= $ride['km_before'] ?></td>
                 <td><?= $ride['km_after'] ?></td>
                 <td><?= $ride['note'] ?></td>

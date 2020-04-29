@@ -36,7 +36,7 @@ header("location:login.php");
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar sidebar-sticky">
                 <ul class="nav flex-column">
-                <?php if ($_SESSION["userRole"]=="1" || $_SESSION["userRole"] == "2") {
+                <?php if ($_SESSION["userRole"]=="1" || $_SESSION["userRole"] == "2" || $_SESSION["userRole"] == "3") {
                         ?>   <li class="nav-item">
                         <a class="nav-link " href="cars.php">
                             Vozidla <span class="sr-only">(current)</span>
@@ -57,7 +57,7 @@ header("location:login.php");
                     }
                     ?>
 
-                    <?php if ($_SESSION["userRole"]=="1" || $_SESSION["userRole"] == "2") {
+                    <?php if ($_SESSION["userRole"]=="1" ) {
                         ?> <li class="nav-item">
                         <a class="nav-link" href="employees.php">
                             Výpis uživatelů </a>
