@@ -18,9 +18,6 @@ class Model
         return $drivers;
     }
 
-    
-
-
     public static function getRidesByCar($idCar)
     {
         $sql = "SELECT c.id_car, r.id_ride, r.id_car, r.time_left, r.time_arrived, r.place_left, r.place_arrived, r.km_before,
@@ -39,8 +36,9 @@ class Model
     
     public static function getAllDriverRides($idUser)
     {
-        $sql = "SELECT u.id_user, r.id_ride, r.id_car, r.time_left, r.time_arrived, r.place_left, r.place_arrived, r.km_before,
-                r.km_after, r.note
+        $sql = "SELECT u.id_user, r.id_ride, r.id_car, r.time_left, r.time_arrived,
+                       r.place_left, r.place_arrived, r.km_before,
+                       r.km_after, r.note
                 FROM rides r
                 JOIN users_rides ur ON r.id_ride = ur.id_ride
                 JOIN users u ON ur.id_user = u.id_user
@@ -78,6 +76,12 @@ class Model
         }
     }
 
+    /**
+     * Gets user info by ID.
+     *
+     * @param int $idUser ID of the user.
+     * @return array Containing user info.
+     */
     public static function getUserById($idUser)
     {
         $sql = "SELECT * FROM users
@@ -143,7 +147,7 @@ class Model
         $result = Database::query($sql);
         
         while ($row = $result->fetch_assoc()) {
-            $cars[]= $row;
+            $cars[] = $row;
         }
 
         return $cars;
@@ -174,8 +178,6 @@ class Model
         while ($row = $result->fetch_assoc()) {
             $rides[] = $row;
         }
-        
-      
         return $rides;
     }
 
@@ -188,7 +190,6 @@ class Model
         while ($row = $result->fetch_assoc()) {
             $roles[] = $row;
         }
-
         return $roles;
     }
 
@@ -198,9 +199,6 @@ class Model
         type = '$type',
         SPZ = '$SPZ'
         WHERE id_car = $idCar ";
-        
-
-        
         return  Database::query($sql);
     }
 
@@ -280,34 +278,27 @@ class Model
         VALUES ('$car', '%s')", $ride['id_ride']);
         $result2 = Database::query($sql2);
 
-    
         return $result2;
-         
-      
     }
 
 
-  // vypíše vyzidla, která může  konkrétní řidič používat  
+    // vypíše vyzidla, která může  konkrétní řidič používat
     public static function getCarsByUserId($id_user)
     {
         $sql = "SELECT * FROM cars c
         JOIN users_cars ur ON c.id_car = ur.id_car
         WHERE ur.id_user = '$id_user'";
-        ;
         $result = Database::query($sql);
-        
         while ($row = $result->fetch_assoc()) {
-            $cars[]= $row;
+            $cars[] = $row;
         }
         var_dump($cars);
         return $cars;
-
-       
     }
 
 
-    //přiřadí řidiči vozidlo, které může používat 
-    public static function user_car($idUser, $idCar)
+    // přiřadí řidiči vozidlo, které může používat
+    public static function userCar($idUser, $idCar)
     {
         $sql = "INSERT INTO users_cars (`id_user`, `id_car`)
         VALUES ('$idUser', '$idCar')";
