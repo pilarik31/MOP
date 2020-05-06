@@ -1,7 +1,7 @@
 <?php
 include_once 'header.php';
 if(!in_array($_SESSION["userRole"], array(1,2,3,4))) { 
-    header("location: index.php?restcrict=1"); // někdo řeší přes JS
+    header("location: index.php?restcrict=1"); 
 }
 
 

@@ -1,12 +1,10 @@
 <?php
 include_once "header.php";
 
-if (!($_SESSION["userRole"]=="1")) {
-    header("location:index.php");
-
+if(!in_array($_SESSION["userRole"], array(1))) { 
+  header("location: index.php?restcrict=1"); 
 }
 
-$cars = Model::getAllCars();
 
 $submit = filter_input(INPUT_POST, "submit");
 

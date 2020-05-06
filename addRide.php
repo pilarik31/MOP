@@ -1,7 +1,7 @@
 <?php
 include_once "header.php";
-if (!($_SESSION["userRole"] == "1" || $_SESSION["userRole"] == "4")) {
-    header("location:index.php");
+if(!in_array($_SESSION["userRole"], array(1,4))) { 
+    header("location: index.php?restcrict=1"); 
 }
 
 $submit = filter_input(INPUT_POST, "submit");
@@ -31,7 +31,7 @@ if (isset($submit)) {
     
 
   
-var_dump($cars);
+
     
     if ($isAdded) {
         echo "zápis proběhl v pořádku";
@@ -45,17 +45,12 @@ var_dump($cars);
   <form action="addRide.php" method="post">
 
 
-
-
-  
-
-
   <label for="user">Řidič</label><br>
   <select id="user" name="user">
   <?php 
   foreach ($users as $user) {?>
 
-  <option value="<?= $user['firstname']?> "> <?= $user['firstname'] ?> <?php
+  <option value="<?= $user['id_user']?> "> <?= $user['firstname'] ?> <?php
   } ?>
   </select><br> 
   
@@ -65,7 +60,7 @@ var_dump($cars);
   <?php 
   foreach ($cars as $car) {?>
 
-  <option value="<?= $car['SPZ']?> "> <?= $car['SPZ'] ?> <?php
+  <option value="<?= $car['id_car']?> "> <?= $car['SPZ'] ?> <?php
   } ?>
   </select><br> 
   </select><br> 

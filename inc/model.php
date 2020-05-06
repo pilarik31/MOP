@@ -124,7 +124,7 @@ class Model
     }
 
     public static function getUserRoleName($idRole)
-    {       
+    {
         $sql = "SELECT role_name FROM roles
         WHERE id_role LIKE '$idRole' ";
         $result = Database::query($sql);
@@ -132,7 +132,6 @@ class Model
             $idRole = $row;
         }
         return $idRole;
-
     }
     
 
@@ -171,6 +170,7 @@ class Model
         JOIN users_rides ur ON r.id_ride = ur.id_ride
         JOIN users u ON ur.id_user = u.id_user;";
         $result = Database::query($sql);
+        $rides = array();
         while ($row = $result->fetch_assoc()) {
             $rides[] = $row;
         }
@@ -249,7 +249,7 @@ class Model
 
     public static function addCar($type, $SPZ)
     {
-        $sql = "INSERT INTO cars(type, SPZ)
+        $sql = "INSERT INTO cars (type, SPZ)
         VALUES ('$type', '$SPZ')";
         return  Database::query($sql);
     }
@@ -270,38 +270,43 @@ class Model
 
         $sql = "INSERT INTO `rides` (`id_user`, `id_car`, `time_left`, `time_arrived`, `place_left`, `place_arrived`, `km_before`, `km_after`, `note`, `state`)
         VALUES ('$idUser', '$car', '$timeLeft', '$timeArrived', '$placeLeft', '$placeArrived', '$kmBefore', '$kmAfter', '$note', '$state');";
-
+        $result = Database::query($sql);
+        
         $sql1 = "SELECT id_ride FROM rides ORDER BY id_ride DESC LIMIT 1";
-        $result = Database::query($sql1);
-        while ($row = $result->fetch_assoc()) {
-            $ride = $row;
-            var_dump($ride);
-        }
-      
+        $result1 = Database::query($sql1);
+        $ride =  $result1->fetch_assoc();
+    
         $sql2 = sprintf("INSERT INTO cars_rides (id_car, id_ride)
         VALUES ('$car', '%s')", $ride['id_ride']);
-       $result = Database::query($sql2);
+        $result2 = Database::query($sql2);
 
-
-        return Database::query($sql);
+       var_dump($sql);
+        return $result2;
+         
+      
     }
 
     public static function getCarsByUserId($id_user)
     {
         $sql = "SELECT * FROM cars c
         JOIN users_cars ur ON c.id_car = ur.id_car
-        WHERE ur.id_user = '$id_user'";;
+        WHERE ur.id_user = '$id_user'";
+        ;
         $result = Database::query($sql);
         
         while ($row = $result->fetch_assoc()) {
             $cars[]= $row;
-        } 
+        }
 
         return $cars;
     }
 
-  
+    public static function user_car($idUser, $idCar)
+    {
+        $sql = "INSERT INTO users_cars (`id_user`, `id_car`)
+        VALUES ('$idUser', '$idCar')";
+        return Database::query($sql);
+    }
+
+    
 }
-
-
-
