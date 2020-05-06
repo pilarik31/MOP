@@ -6,7 +6,7 @@ class Model
     private const SALT = 'fsdnjuibfasuiasoibdiob2619adsas';
 
    
-    
+    // vybere všechny řidiče (uživatele s id 4)
     public static function getAllDrivers()
     {
         $sql = "SELECT * FROM users
@@ -280,7 +280,7 @@ class Model
         VALUES ('$car', '%s')", $ride['id_ride']);
         $result2 = Database::query($sql2);
 
-       var_dump($sql);
+    
         return $result2;
          
       
@@ -299,11 +299,12 @@ class Model
         while ($row = $result->fetch_assoc()) {
             $cars[]= $row;
         }
-
+        var_dump($cars);
         return $cars;
 
        
     }
+
 
     //přiřadí řidiči vozidlo, které může používat 
     public static function user_car($idUser, $idCar)

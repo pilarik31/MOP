@@ -8,9 +8,9 @@ $submit = filter_input(INPUT_POST, "submit");
 
 // $cars = Model::getAllCars();
 $users = Model::getAllDrivers();
+$getCars = Model::getCarsByUserId($id_user);
 
 
-    
 
 if (isset($submit)) {
     $idUser = filter_input(INPUT_POST, "user");
@@ -41,6 +41,7 @@ if (isset($submit)) {
     } else {
         echo "něco se pos*alo";
     }
+    
 }
 ?>
 
