@@ -6,11 +6,11 @@ if(!in_array($_SESSION["userRole"], array(1,4))) {
 
 $submit = filter_input(INPUT_POST, "submit");
 
-$cars = Model::getAllCars();
-$users = Model::getAllUsers();
-$getCars = Model::getCarsByUserId($id_user);
+// $cars = Model::getAllCars();
+$users = Model::getAllDrivers();
 
 
+    
 
 if (isset($submit)) {
     $idUser = filter_input(INPUT_POST, "user");
@@ -22,11 +22,14 @@ if (isset($submit)) {
     $kmBefore = filter_input(INPUT_POST, "kmBefore");
     $kmAfter = filter_input(INPUT_POST, "kmAfter");
     $note = filter_input(INPUT_POST, "note");
-    $state = filter_input(INPUT_POST,"state" );
+    $state = filter_input(INPUT_POST,"state" 
+    );
 
     $isAdded = Model::addRide(
     $idUser, $car, $timeLeft, $timeArrived, $placeLeft, $placeArrived, $kmBefore, $kmAfter, $note, $state
      
+
+
     );
     
 
@@ -45,12 +48,16 @@ if (isset($submit)) {
   <form action="addRide.php" method="post">
 
 
+
+
+
+
   <label for="user">Řidič</label><br>
   <select id="user" name="user">
   <?php 
   foreach ($users as $user) {?>
 
-  <option value="<?= $user['id_user']?> "> <?= $user['firstname'] ?> <?php
+  <option value="<?= $user['id_user']?> "> <?= $user['firstname'] . " " .  $user['surname']?> <?php
   } ?>
   </select><br> 
   
@@ -58,9 +65,9 @@ if (isset($submit)) {
   <label for="car">Vozidlo</label><br>
   <select id="car" name="car">
   <?php 
-  foreach ($cars as $car) {?>
+  foreach ($getCars as $car) {?>
 
-  <option value="<?= $car['id_car']?> "> <?= $car['SPZ'] ?> <?php
+  <option value="<?= $car['id_car']?> "> <?= $car ['type'] . " " . $car['SPZ'] ?> <?php
   } ?>
   </select><br> 
   </select><br> 

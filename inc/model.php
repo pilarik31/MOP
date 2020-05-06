@@ -286,6 +286,8 @@ class Model
       
     }
 
+
+  // vypíše vyzidla, která může  konkrétní řidič používat  
     public static function getCarsByUserId($id_user)
     {
         $sql = "SELECT * FROM cars c
@@ -299,8 +301,11 @@ class Model
         }
 
         return $cars;
+
+       
     }
 
+    //přiřadí řidiči vozidlo, které může používat 
     public static function user_car($idUser, $idCar)
     {
         $sql = "INSERT INTO users_cars (`id_user`, `id_car`)
